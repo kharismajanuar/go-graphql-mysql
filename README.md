@@ -1,5 +1,5 @@
 # GraphQL Implementation in Golang with MySQL
-Using GraphQL for API in Go with MySQL. This project is for learning purpose.
+This is example of using GraphQL for API in Go with MySQL. This project is for my learning purpose.
 
 # Dependencies
 
@@ -21,7 +21,7 @@ export DB_CONN="<username>:<password>@tcp(<hostname>:<port>)/<db_name>?parseTime
 ```
 
 # Sample Queries
- Query to create new user
+Query to create new user
 ```graphql
 mutation {
   createUser(name: "Kharisma Januar", email: "kharisma.januar@gmail.com") {
@@ -30,5 +30,121 @@ mutation {
     email
     created_at
   }
+}
+```
+Query to get all users
+```graphql
+query {
+  users {
+    id
+    name
+    email
+    created_at
+    updated_at
+  }
+}
+```
+Query to get user by id
+```graphql
+query {
+  user(id: 1) {
+    id
+    name
+    email
+    created_at
+    updated_at
+  }
+}
+```
+Query to update user
+```graphql
+mutation {
+  updateUser(id: 1, name: "Kharisma Januar", email: "kharisma.januar@gmail.com") {
+    id
+    name
+    email
+    updated_at
+  }
+}
+```
+Query to delete user (soft delete)
+```graphql
+mutation {
+  deleteUser(id: 1) {
+    id
+  }
+}
+```
+Query to create new task
+```graphql
+mutation {
+  createTask(name: "Study GraphQL Go", description: "Implement GraphQL in Go", user_id:1) {
+    id
+    name
+    created_at
+    user{
+        id
+    }
+  }
+}
+```
+Query to get all tasks
+```graphql
+query{
+    tasks{
+        id
+        name
+        description
+        is_complete
+        created_at
+        updated_at
+        user{
+            id
+            name
+            email
+        }
+    }
+}
+```
+Query to get task by id
+```graphql
+query {
+  task(id: 1) {
+    id
+    name
+    description
+    is_complete
+    user{
+        id
+        email
+        name
+    }
+    created_at
+    updated_at
+  }
+}
+```
+Query to update task
+```graphql
+mutation {
+  updateTask(id: 1, name: "Learn Git", description: "Learn Git for beginners", user_id:1, is_complete: true) {
+    id
+    name
+    description
+    user{
+        id
+        name
+    }
+    is_complete
+    updated_at
+  }
+}
+```
+Query to delete task
+```graphql
+mutation{
+    deleteTask(id:1) {
+        id
+    }
 }
 ```
