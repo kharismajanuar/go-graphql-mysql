@@ -140,7 +140,7 @@ mutation {
   }
 }
 ```
-Query to delete task
+Query to delete task (soft delete)
 ```graphql
 mutation{
     deleteTask(id:1) {
